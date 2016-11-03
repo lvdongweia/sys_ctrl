@@ -1,0 +1,562 @@
+#############RECEIVE FROM CAN##################
+
+1. Power on system
+TLV:
+    RP_SYSCTRL_POWER_ON_NOTI                = 71, //0x47    	4  	uint16         	ALL: 1xxxxxxx,xxxxxxxx;
+											NOT ALL: 0xxxxxxx,xxxxxxxx
+											one bit one sub-system from right-hand
+CLI:
+    ./rsc_cli receive_from_can 20 47048000 4
+
+2. Init command response
+TLV:
+    COMMON_SYSCTRL_INIT_CMD_REP             = 2,  //0x02	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 020300 3
+    ./rsc_cli receive_from_can 10 020300 3
+    ./rsc_cli receive_from_can 20 020300 3
+    ./rsc_cli receive_from_can 30 020300 3
+    ./rsc_cli receive_from_can 40 020300 3
+    ./rsc_cli receive_from_can 50 020300 3
+    ./rsc_cli receive_from_can 60 020300 3
+
+3. Sub-sys state query response
+TLV:
+    COMMON_SYSCTRL_SUBSYS_STATE_QUERY_REP   = 25, //0x19	4	uint8		See RobotStatus		uint8	See SubStatus
+CLI:
+    +++++++++++work+++++++++++++++++
+    ./rsc_cli receive_from_can 06 19040500 4
+    ./rsc_cli receive_from_can 10 19040500 4
+    ./rsc_cli receive_from_can 20 19040500 4
+    ./rsc_cli receive_from_can 30 19040500 4
+    ./rsc_cli receive_from_can 40 19040500 4
+    ./rsc_cli receive_from_can 50 19040500 4
+    ./rsc_cli receive_from_can 60 19040500 4
+    ++++++++++++halt+++++++++++++++++
+    ./rsc_cli receive_from_can 06 19040900 4
+    ./rsc_cli receive_from_can 10 19040900 4
+    ./rsc_cli receive_from_can 20 19040900 4
+    ./rsc_cli receive_from_can 30 19040900 4
+    ./rsc_cli receive_from_can 40 19040900 4
+    ./rsc_cli receive_from_can 50 19040900 4
+    ./rsc_cli receive_from_can 60 19040900 4
+    ++++++++++++charge++++++++++++++++
+    ./rsc_cli receive_from_can 06 19040700 4
+    ./rsc_cli receive_from_can 10 19040700 4
+    ./rsc_cli receive_from_can 20 19040700 4
+    ./rsc_cli receive_from_can 30 19040700 4
+    ./rsc_cli receive_from_can 40 19040700 4
+    ./rsc_cli receive_from_can 50 19040700 4
+    ./rsc_cli receive_from_can 60 19040700 4
+    ++++++++++++security+++++++++++++
+    ./rsc_cli receive_from_can 06 19040A00 4
+    ./rsc_cli receive_from_can 10 19040A00 4
+    ./rsc_cli receive_from_can 20 19040A00 4
+    ./rsc_cli receive_from_can 30 19040A00 4
+    ./rsc_cli receive_from_can 40 19040A00 4
+    ./rsc_cli receive_from_can 50 19040A00 4
+    ./rsc_cli receive_from_can 60 19040A00 4
+    ++++++++++++upgrade+++++++++++++
+    ./rsc_cli receive_from_can 06 19040B00 4
+    ./rsc_cli receive_from_can 10 19040B00 4
+    ./rsc_cli receive_from_can 20 19040B00 4
+    ./rsc_cli receive_from_can 30 19040B00 4
+    ./rsc_cli receive_from_can 40 19040B00 4
+    ./rsc_cli receive_from_can 50 19040B00 4
+    ./rsc_cli receive_from_can 60 19040B00 4
+
+4. Sub-sys state notification
+TLV:
+    COMMON_SYSCTRL_SUBSYS_STATE_CHANGE_NOTI = 22, //0x16	4	uint8		See RobotStatus		uint8	See SubStatus
+CLI:
+    ./rsc_cli receive_from_can 06 16040500 4
+    ./rsc_cli receive_from_can 10 16040500 4
+    ./rsc_cli receive_from_can 20 16040500 4
+    ./rsc_cli receive_from_can 30 16040500 4
+    ./rsc_cli receive_from_can 40 16040500 4
+    ./rsc_cli receive_from_can 50 16040500 4
+    ./rsc_cli receive_from_can 60 16040500 4
+
+5. Register query response
+TLV:
+    RM_SYSCTRL_REGISTERED_QUERY_REP         = 76, //0x4C	3	uint8		YES 1; NO 0
+CLI:
+    ./rsc_cli receive_from_can 06 4C0301 3	YES
+    ./rsc_cli receive_from_can 06 4C0300 3	NO
+
+6. Register command response
+TLV:
+    RM_SYSCTRL_REGISTER_CMD_REP             = 66, //0x42	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 420300 3	SUCCESS
+    ./rsc_cli receive_from_can 06 4203FF 3	FAILED
+
+7. Register notification
+TLV:
+    RM_SYSCTRL_REGISTERED_NOTI              = 71, //0x47	3	uint8		YES 1; NO 0
+CLI:
+    ./rsc_cli receive_from_can 06 470301 3	YES
+    ./rsc_cli receive_from_can 06 470300 3	NO
+
+8. Login query response
+TLV:
+    RM_SYSCTRL_LOGIN_QUERY_REP              = 78, //0x4E	3	uint8		YES 1; NO 0
+CLI:
+    ./rsc_cli receive_from_can 06 4E0301 3	YES
+    ./rsc_cli receive_from_can 06 4E0300 3	NO
+
+9. Login command response
+TLV:
+    RM_SYSCTRL_LOGIN_CMD_REP                = 68, //0x44	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 440300 3	SUCCESS
+    ./rsc_cli receive_from_can 06 4403FF 3	FAILED
+
+10. Login notification
+TLV:
+    RM_SYSCTRL_LOGIN_NOTI                   = 72, //0x48	3	uint8		YES 1; NO 0
+CLI:
+    ./rsc_cli receive_from_can 06 480301 3	YES
+    ./rsc_cli receive_from_can 06 480300 3	NO
+
+11. Halt command
+TLV:
+    COMMON_SYSCTRL_HALT_CMD                 = 11, //0x0B	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 0B02 2
+
+12. Halt command response
+TLV:
+    COMMON_SYSCTRL_HALT_CMD_REP             = 12, //0x0C	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 0C0300 3
+    ./rsc_cli receive_from_can 10 0C0300 3
+    ./rsc_cli receive_from_can 20 0C0300 3
+    ./rsc_cli receive_from_can 30 0C0300 3
+    ./rsc_cli receive_from_can 40 0C0300 3
+    ./rsc_cli receive_from_can 50 0C0300 3
+    ./rsc_cli receive_from_can 60 0C0300 3
+
+13. Halt notification
+TLV:
+    RP_SYSCTRL_POWER_OFF_NOTI               = 70, //0x46    	4  	uint16         	ALL: 1xxxxxxx,xxxxxxxx;
+											NOT ALL: 0xxxxxxx,xxxxxxxx
+											one bit one sub-system from right-hand
+
+CLI:
+    ./rsc_cli receive_from_can 20 46048000 4
+
+14. Charge notificaiton
+TLV:
+    COMMON_SYSCTRL_POWER_CHARGE_NOTI        = 20, //0x14	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 20 1402 2
+
+15. Exit charge notification
+TLV:
+    COMMON_SYSCTRL_POWER_CHARGE_END_NOTI    = 21, //0x15	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 20 1502 2
+
+16. Security command
+TLV:
+    COMMON_SYSCTRL_SECURITY_CMD             = 7,  //0x07	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 0702 2
+
+17. Security command response
+TLV:
+    COMMON_SYSCTRL_SECURITY_CMD_REP         = 8,  //0x08	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 080300 3
+    ./rsc_cli receive_from_can 10 080300 3
+    ./rsc_cli receive_from_can 20 080300 3
+    ./rsc_cli receive_from_can 30 080300 3
+    ./rsc_cli receive_from_can 40 080300 3
+    ./rsc_cli receive_from_can 50 080300 3
+    ./rsc_cli receive_from_can 60 080300 3
+
+18. Exit security command
+TLV:
+    COMMON_SYSCTRL_EXIT_SECURITY_CMD        = 9,  //0x09	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 0902 2
+
+19. Exit security command response
+TLV:
+    COMMON_SYSCTRL_EXIT_SECURITY_CMD_REP    = 10, //0x0A	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 0A0300 3
+    ./rsc_cli receive_from_can 10 0A0300 3
+    ./rsc_cli receive_from_can 20 0A0300 3
+    ./rsc_cli receive_from_can 30 0A0300 3
+    ./rsc_cli receive_from_can 40 0A0300 3
+    ./rsc_cli receive_from_can 50 0A0300 3
+    ./rsc_cli receive_from_can 60 0A0300 3
+
+20. RF Wake notification
+TLV:
+    RF_SYSCTRL_WAKE_NOTI                    = 65, //0x41	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 30 4102 2
+
+21. Sleep command
+TLV:
+    COMMON_SYSCTRL_SLEEP_CMD                = 3,  //0x03	3	int8		SHALLOW 0; DEEP 1
+CLI:
+    ./rsc_cli receive_from_can 06 030300 3 	SHALLOW
+    ./rsc_cli receive_from_can 06 030301 3 	DEEP
+
+22. Shallow sleep command response
+TLV:
+    COMMON_SYSCTRL_SLEEP_CMD_REP            = 4,  //0x04	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 040300 3
+    ./rsc_cli receive_from_can 10 040300 3
+    ./rsc_cli receive_from_can 20 040300 3
+    ./rsc_cli receive_from_can 30 040300 3
+    ./rsc_cli receive_from_can 40 040300 3
+    ./rsc_cli receive_from_can 50 040300 3
+    ./rsc_cli receive_from_can 60 040300 3
+
+23. Wakeup command
+TLV:
+    COMMON_SYSCTRL_WAKE_CMD                 = 5,  //0x05	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 0502 2
+
+24. Wakeup command response
+TLV:
+    COMMON_SYSCTRL_WAKE_CMD_REP             = 6,  //0x06	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 060300 3
+    ./rsc_cli receive_from_can 10 060300 3
+    ./rsc_cli receive_from_can 20 060300 3
+    ./rsc_cli receive_from_can 30 060300 3
+    ./rsc_cli receive_from_can 40 060300 3
+    ./rsc_cli receive_from_can 50 060300 3
+    ./rsc_cli receive_from_can 60 060300 3
+
+25. S_poweron change
+TLV:
+    INTERNAL_SYSCTRL_S_POWERON_CHANGE       = 3,  //0x03	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 00 0302 2
+
+26. Debug command
+TLV:
+    COMMON_SYSCTRL_DEBUG_CMD                = 13, //0x0D	3	uint8		Enable 1; Disable 0
+CLI:
+    ./rsc_cli receive_from_can 06 0D0301 3  Enable
+    ./rsc_cli receive_from_can 06 0D0300 3  Disable
+
+27. Debug command response
+TLV:
+    COMMON_SYSCTRL_DEBUG_CMD_REP            = 14, //0x0E	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 0E0300 3
+    ./rsc_cli receive_from_can 10 0E0300 3
+    ./rsc_cli receive_from_can 20 0E0300 3
+    ./rsc_cli receive_from_can 30 0E0300 3
+    ./rsc_cli receive_from_can 40 0E0300 3
+    ./rsc_cli receive_from_can 50 0E0300 3
+    ./rsc_cli receive_from_can 60 0E0300 3
+
+28. Mode command
+TLV:
+    COMMON_SYSCTRL_MODE_CMD                 = 15, //0x0F	3	uint8		DEVELOP_MODE 0; CHILD_MODE 1; GUARD_MODE 2
+CLI:
+    ./rsc_cli receive_from_can 06 0F0300 3  DEVELOP_MODE
+    ./rsc_cli receive_from_can 06 0F0301 3  CHILD_MODE
+    ./rsc_cli receive_from_can 06 0F0302 3  GUARD_MODE
+
+29. Mode command response
+TLV:
+    COMMON_SYSCTRL_MODE_CMD_REP             = 16, //0x10	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 100300 3
+    ./rsc_cli receive_from_can 10 100300 3
+    ./rsc_cli receive_from_can 20 100300 3
+    ./rsc_cli receive_from_can 30 100300 3
+    ./rsc_cli receive_from_can 40 100300 3
+    ./rsc_cli receive_from_can 50 100300 3
+    ./rsc_cli receive_from_can 60 100300 3
+
+30. Restore factory mode command
+TLV:
+    RM_SYSCTRL_RESTORE_FACTORY_CMD          = 69, //0x45	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 4502 2
+
+31. Battery change notification
+TLV:
+    RP_SYSCTRL_BATTERY_NOTI                 = 65, //0x41	3	uint8		Percentage: 0~100
+CLI:
+    ./rsc_cli receive_from_can 20 410314 3
+
+32. Battery query
+TLV:
+    RM_SYSCTRL_BATTERY_QUERY                = 73, //0x49	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 07 4902 2
+
+33. Abnormal occur
+TLV:
+    COMMON_SYSCTRL_ABNORMAL_OCCUR_NOTI      = 17, //0x11	6	uint32		Please see falt manager
+CLI:
+    ./rsc_cli receive_from_can 20 110600000100 6
+
+34. Abnormal resolved
+TLV:
+    COMMON_SYSCTRL_ABNORMAL_RESOLVE_NOTI    = 18, //0x12	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 20 1202 2
+
+35. Low power notification
+TLV:
+    COMMON_SYSCTRL_LOW_POWER_NOTI           = 19, //0x13	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 1302 2
+
+36. Battery notification from RP
+TLV:
+    RP_SYSCTRL_BATTERY_NOTI                 = 69, //0x45	3	uint8*11       	Please see following
+	*send_data=RP_SYSCTRL_BATTERY_NOTI;
+	*(send_data+1)=0x0A;                                	//command length
+	*(send_data+2)=RpData.ChargingStatus;               	//power charging status
+	*(send_data+3)=RpData.BatteryStatus;                	//battery status
+	*(send_data+4)=RpData.BatteryQuantity;              	//battery quantity
+	*(send_data+5)=RpBatData.BatSingle_Avg_Vol_Val>>8; 	//battery voltage (mV)
+	*(send_data+6)=RpBatData.BatSingle_Avg_Vol_Val;
+	*(send_data+7)=RpBatData.Bat_Temp_Val1>>8;         	//battery temperature
+	*(send_data+8)=RpBatData.Bat_Temp_Val1;
+	*(send_data+9)=RpData.BatteryTechnology;            	//battery technology
+CLI:
+    ./rsc_cli receive_from_can 20 450A0201640040012C02 10
+
+37. Power off response
+TLV:
+    RP_SYSCTRL_POWER_OFF_CMD_REP            = 66, //0x42    	3    	int8        	SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 20 420300 3	SUCCESS
+    ./rsc_cli receive_from_can 20 4203FF 3	FAILED
+
+38. Power on response
+TLV:
+    RP_SYSCTRL_POWER_ON_CMD_REP             = 68, //0x44    	3    	int8        	SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 20 440300 3	SUCCESS
+    ./rsc_cli receive_from_can 20 4403FF 3	FAILED
+
+39. version query response
+    COMMON_SYSCTRL_VERSION_QUERY_REP        = 27, //0x1B	11    	uint8*9       	Please see following
+	*send_data=COMMON_SYSCTRL_VERSION_QUERY_REP;
+	*(send_data+1)=0x0B;                                	//command length
+	*(send_data+2)=sub-sys-id;               	        //sub-system ID
+	*(send_data+3)=major;                	                //major version number
+	*(send_data+4)=minor;              	                //minor version number
+	*(send_data+5)=revision; 	                        //revision number
+	*(send_data+6)=year>>8;
+	*(send_data+7)=year;                                    //building year
+	*(send_data+8)=month;         	                        //building month
+	*(send_data+9)=day;                                     //building day
+	*(send_data+10)=rom-id;            	                //rom id
+CLI:
+    ./rsc_cli receive_from_can 06 1B0B0001000007DF011D01 11
+    ./rsc_cli receive_from_can 10 1B0B0101000007DF011D01 11
+    ./rsc_cli receive_from_can 20 1B0B0201000007DF011D01 11
+    ./rsc_cli receive_from_can 30 1B0B0301000007DF011D01 11
+    ./rsc_cli receive_from_can 40 1B0B0401000007DF011D01 11
+    ./rsc_cli receive_from_can 50 1B0B0501000007DF011D01 11
+    ./rsc_cli receive_from_can 60 1B0B0601000007DF011D01 11
+
+40. Upgrade command
+TLV:
+    COMMON_SYSCTRL_UPGRADE_CMD             = 32, //0x20	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 2002 2
+
+41. Upgrade command response
+TLV:
+    COMMON_SYSCTRL_UPGRADE_CMD_REP         = 33, //0x21	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 210300 3
+    ./rsc_cli receive_from_can 10 210300 3
+    ./rsc_cli receive_from_can 20 210300 3
+    ./rsc_cli receive_from_can 30 210300 3
+    ./rsc_cli receive_from_can 40 210300 3
+    ./rsc_cli receive_from_can 50 210300 3
+    ./rsc_cli receive_from_can 60 210300 3
+
+42. Exit upgrade command
+TLV:
+    COMMON_SYSCTRL_EXIT_UPGRADE_CMD        = 34, //0x22	2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 2202 2
+
+43. Exit upgrade command response
+TLV:
+    COMMON_SYSCTRL_EXIT_UPGRADE_CMD_REP    = 35, //0x23	3	int8		SUCCESS 0; FAILED -1
+CLI:
+    ./rsc_cli receive_from_can 06 230300 3
+    ./rsc_cli receive_from_can 10 230300 3
+    ./rsc_cli receive_from_can 20 230300 3
+    ./rsc_cli receive_from_can 30 230300 3
+    ./rsc_cli receive_from_can 40 230300 3
+    ./rsc_cli receive_from_can 50 230300 3
+    ./rsc_cli receive_from_can 60 230300 3
+
+44. Not low power notification
+TLV:
+    COMMON_SYSCTRL_NOT_LOW_POWER_NOTI      = 36, //0x24 2	None		None
+CLI:
+    ./rsc_cli receive_from_can 06 2402 2
+
+#############SEND TO CAN##################
+
+1. Init command
+TLV:
+    COMMON_SYSCTRL_INIT_CMD                 = 1,  //0x01	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 0102 2
+
+2. Sleep command
+TLV:
+    COMMON_SYSCTRL_SLEEP_CMD                = 3,  //0x03	3	int8		SHALLOW 0; DEEP 1
+CLI:
+    ./rsc_cli send_to_can 70 030300 3 	SHALLOW
+    ./rsc_cli send_to_can 70 030301 3 	DEEP
+
+3. Wakeup command
+TLV:
+    COMMON_SYSCTRL_WAKE_CMD                 = 5,  //0x05	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 0502 2
+
+4. Security command
+TLV:
+    COMMON_SYSCTRL_SECURITY_CMD             = 7,  //0x07	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 0702 2
+
+5. Exit Security command
+TLV:
+    COMMON_SYSCTRL_EXIT_SECURITY_CMD        = 9,  //0x09	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 0902 2
+
+6. Halt command
+TLV:
+    COMMON_SYSCTRL_HALT_CMD                 = 11, //0x0B	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 0B02 2
+
+7. Debug command
+TLV:
+    COMMON_SYSCTRL_DEBUG_CMD                = 13, //0x0D	3	uint8		Enable 1; Disable 0
+CLI:
+    ./rsc_cli send_to_can 70 0D0301 3    Enable
+    ./rsc_cli send_to_can 70 0D0300 3    Disable
+
+8. Mode command
+TLV:
+    COMMON_SYSCTRL_MODE_CMD                 = 15, //0x0F	3	uint8		DEVELOP_MODE 0; CHILD_MODE 1; GUARD_MODE 2
+CLI:
+    ./rsc_cli send_to_can 70 0F0300 3  DEVELOP_MODE
+    ./rsc_cli send_to_can 70 0F0301 3  CHILD_MODE
+    ./rsc_cli send_to_can 70 0F0302 3  GUARD_MODE
+
+9. Low power notification
+TLV:
+    COMMON_SYSCTRL_LOW_POWER_NOTI           = 19, //0x13	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 1302 2
+
+10. Power charge notification
+TLV:
+    COMMON_SYSCTRL_POWER_CHARGE_NOTI        = 20, //0x14	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 1402 2
+
+11. Sub-system state query
+TLV:
+    COMMON_SYSCTRL_SUBSYS_STATE_QUERY       = 24, //0x18	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 1802 2
+
+12. Register command
+TLV:
+    RM_SYSCTRL_REGISTER_CMD                 = 65, //0x41	2	None		None
+CLI:
+    ./rsc_cli send_to_can 06 4102 2
+
+13. Login command
+TLV:
+    RM_SYSCTRL_LOGIN_CMD                    = 67, //0x43	2	None		None
+CLI:
+    ./rsc_cli send_to_can 06 4302 2
+
+14. Register query
+TLV:
+    RM_SYSCTRL_REGISTERED_QUERY             = 75, //0x4B	2	None		None
+CLI:
+    ./rsc_cli send_to_can 06 4B02 2
+
+15. Login query
+TLV:
+    RM_SYSCTRL_LOGIN_QUERY                  = 77, //0x4D	2	None		None
+CLI:
+    ./rsc_cli send_to_can 06 4D02 2
+
+16. Power off command
+TLV:
+    RP_SYSCTRL_POWER_OFF_CMD                = 65, //0x41    	4  	uint16         	ALL: 1xxxxxxx,xxxxxxxx;
+											NOT ALL: 0xxxxxxx,xxxxxxxx
+											one bit one sub-system from right-hand
+CLI:
+    ./rsc_cli send_to_can 20 41040001 4     Rm
+    ./rsc_cli send_to_can 20 41040002 4     Rc
+    ./rsc_cli send_to_can 20 41040004 4     Rp
+    ./rsc_cli send_to_can 20 41040008 4     Rf
+    ./rsc_cli send_to_can 20 41040010 4     Rb right
+    ./rsc_cli send_to_can 20 41040020 4     Rb left
+    ./rsc_cli send_to_can 20 41040040 4     Rb body
+
+17. Power on command
+TLV:
+    RP_SYSCTRL_POWER_ON_CMD                 = 67, //0x43    	4  	uint16         	ALL: 1xxxxxxx,xxxxxxxx;
+											NOT ALL: 0xxxxxxx,xxxxxxxx
+											one bit one sub-system from right-hand
+CLI:
+    ./rsc_cli send_to_can 20 43040001 4     Rm
+    ./rsc_cli send_to_can 20 43040002 4     Rc
+    ./rsc_cli send_to_can 20 43040004 4     Rp
+    ./rsc_cli send_to_can 20 43040008 4     Rf
+    ./rsc_cli send_to_can 20 43040010 4     Rb right
+    ./rsc_cli send_to_can 20 43040020 4     Rb left
+    ./rsc_cli send_to_can 20 43040040 4     Rb body
+
+18. Version query
+TLV:
+    COMMON_SYSCTRL_VERSION_QUERY            = 26, //0x1A	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 1A02 2
+
+19. Upgrade command
+TLV:
+    COMMON_SYSCTRL_UPGRADE_CMD             = 32, //0x20	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 2002 2
+
+20. Exit Upgrade command
+TLV:
+    COMMON_SYSCTRL_EXIT_UPGRADE_CMD        = 34, //0x22	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 2202 2
+
+21. Not Low power notification
+TLV:
+    COMMON_SYSCTRL_NOT_LOW_POWER_NOTI      = 36, //0x24	2	None		None
+CLI:
+    ./rsc_cli send_to_can 70 2402 2
+
